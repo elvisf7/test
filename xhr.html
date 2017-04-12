@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+    <link rel="icon" href="C:\Users\elvis.farias\Desktop\WP-DOC\frame.ico" sizes="32x32">
+    
+</head>
+<body>
+    <div id="container"></div>
+
+    <script>
+       
+           // $('.container').load("xhr.html");
+
+            /*$.ajax({
+                url:'xhr.json',
+                type: 'GET',
+                tdataType:'json',
+                success:function(resp){
+                   console.log(JSON.stringify(resp));
+                }
+            });
+            $.get('xhr.json', function(resp) {
+                console.log(resp);
+            });*/
+			
+			
+
+
+/*$.ajax({
+  url: root + '/posts',
+  method: 'GET'
+}).then(function(data) {  
+	//console.log(data);
+	posts = data;    
+	let $html="";
+	for ( post of posts){
+	
+		$user = post.userId ;
+		$id= post.id;
+		$title = post.title ;
+		$body = post.body;
+		
+		$html += `<div data-user="${$user}" data-id="${$id}">
+		<h1>${$title}</h1>
+		<pre>${$body}</pre>
+		</div>`;
+	}  
+	
+	$('.container').append($html);
+  
+});*/
+
+
+const CONTAINER = document.getElementById("container");
+let root = 'https://jsonplaceholder.typicode.com';
+
+ /*function xhr_request(){
+            var url = root + '/posts';
+            var xhr = new XMLHttpRequest();
+            try{             
+               xhr = new XMLHttpRequest();
+            }catch (e){               
+               try{
+                  xhr = new ActiveXObject("Msxml2.XMLHTTP");
+					
+               }catch (e) {				
+                  try{
+                     xhr = new ActiveXObject("Microsoft.XMLHTTP");
+                  }catch (e){                     
+                     alert("Your browser broke!");
+                     return false;
+                  }					
+               }
+            }
+			
+            xhr.onreadystatechange = function(){
+			
+               if (xhr.readyState == 4  ){  
+				var data= JSON.parse(xhr.responseText);                 
+				//console.log(posts);
+				postView(data);				
+               }
+            }			
+            xhr.open("GET", url, true);
+            xhr.send();
+         }
+		 */
+		 
+let postView = data =>{
+	let $html="";
+				
+		for ( post of data){
+		
+			$user = post.userId ;
+			$id= post.id;
+			$title = post.title ;
+			$body = post.body;
+			
+			$html += `<div data-user="${$user}" data-id="${$id}">
+			<h1>${$title}</h1>
+			<pre>${$body}</pre>
+			</div>`;
+		}  
+		
+		CONTAINER.innerHTML=$html;	
+}		 
+
+//xhr_request();
+
+var myreq = {
+  html: function() {
+    return $.get('http://jsonplaceholder.typicode.com/posts').then(function(data) {
+	
+	console.log(data);	
+	postView(data);
+	
+    //return data;
+    });
+  }
+}; 
+
+myreq.html();
+
+    </script>
+
+</body>
+</html>
